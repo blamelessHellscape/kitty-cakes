@@ -1,4 +1,4 @@
-from flask import Response
+# from flask import Response
 import json, requests
 
 pi_addr = "http://192.168.50.150:80"; #insert actual IP here.
@@ -10,7 +10,7 @@ def target(cat):
     
     try:
         response = requests.post(pi_addr, data=json.dumps(data), headers=headers)
-        return response.status_code
+        return ('good',response.status_code)
     except Exception:
         print('beef')
         return ('beef1',501)

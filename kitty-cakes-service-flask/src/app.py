@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from flask_cors import CORS
 import os
 from dotenv import load_dotenv
@@ -46,9 +46,9 @@ def donate():
 
     if db["maple"] > db["apricot"]:
         print('targeting maple')
-        return Response(target("maple"))
+        return target("maple")
     else:
-        return Response(target("apricot"))
+        return target("apricot")
 
 
 if __name__ == "__main__":
