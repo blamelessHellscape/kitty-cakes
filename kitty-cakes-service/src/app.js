@@ -32,10 +32,8 @@ db.set("apricot", 0);
 
 
 app.get("/auth", (req, res) => {
-  let secret = getSecret();
-
-  res.json({ secret: secret });
-  // res.sendStatus(200)
+  // let secret = getSecret();
+  res.json({ 'secret': process.env.TWILIO_AUTH_TOKEN, 'sid': process.env.TWILIO_ACCOUNT_SID });
 });
 
 app.get("/auth", (req, res) => {
