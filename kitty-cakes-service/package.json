@@ -1,5 +1,5 @@
 {
-  "name": "kitty-cakes_server",
+  "name": "twitch_server",
   "version": "1.0.0",
   "description": "A  server to handle commands from Twilio. This will be used to handle events and perform the appropriate actions to the WhiskerWatcher.",
   "main": "app.js",
@@ -10,12 +10,9 @@
   "license": "ISC",
   "dependencies": {
     "dotenv": "^16.0.3",
-    "express": "^4.18.2",
-    "request": "^2.81.0",
-    "twilio": "^3.84.1"
+    "express": "^4.18.2"
   },
   "devDependencies": {
-    "in-memory-database": "^1.0.1",
     "nodemon": "^2.0.20"
   }
 }
