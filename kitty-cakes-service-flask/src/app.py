@@ -1,7 +1,7 @@
 from flask import Flask, jsonify, request, Response
 import os
 from dotenv import load_dotenv
-from target import target
+from .target import target
 import sys
 
 app = Flask(__name__)
