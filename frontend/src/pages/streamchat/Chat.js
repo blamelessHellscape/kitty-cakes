@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Client as ConversationsClient } from "@twilio/conversations";
+import { GET_CONVERSATION, GET_AUTH } from './chatAPI';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectGroup } from '../streamButtonSlice';
 
 class ChatScreen extends React.Component {
     constructor(props) {
@@ -19,60 +22,27 @@ class ChatScreen extends React.Component {
     }
 
     getToken = async () => {
-        const response = await axios.get(`http://localhost:5000/auth`);
+        const response = await axios.get(GET_AUTH);
         const { data } = response;
-        return data.secret;
+        return data;
     }
 
-    componentDidMount = async () => {
-        const { location } = this.props;
-        const { state } = location || {};
-        const { room } = state || {};
-        let token = {};
-        console.log("---------------------")
+    getConversation = async () => {
+        const response = await axios.get(GET_CONVERSATION);
+        const { data } = response;
+        return data.sid;
+    }
 
-        try {
-            token = await this.getToken();
-        } catch {
-            throw new Error("unable to get token, please reload this page");
-        }
+    // componentDidMount = async () => {
+    //     const chatResult = useSelector(selectGroup);
+    //     const dispatch = useDispatch();
+    //     const [group_sid] = useState(0);
 
-        // const {secret, sid} = token;
-        const client = await ConversationsClient(token);
+    //     const groupValue = String(group_sid) || '';
 
-        client.on("tokenAboutToExpire", async () => {
-            const token = await this.getToken();
-            client.updateToken(token);
-        });
+    //     const { secret, sid } = this.getToken();
 
-        client.on("tokenExpired", async () => {
-            const token = await this.getToken();
-            client.updateToken(token);
-        });
-
-        client.on("channelJoined", async (channel) => {
-            // getting list of all messages since this is an existing channel
-            const messages = await channel.getMessages();
-            this.setState({ messages: messages.items || [] });
-            this.scrollToBottom();
-        });
-
-        try {
-            const channel = await client.getChannelByUniqueName(room);
-            await this.joinChannel(channel);
-            this.setState({ channel, loading: false })
-        } catch {
-            try {
-                const channel = await client.createChannel({
-                    uniqueName: room,
-                    friendlyName: room,
-                });
-                await this.joinChannel(channel);
-            } catch {
-                throw new Error("unable to create channel, please reload this page");
-            }
-        }
-    };
+    // };
 
     joinChannel = async (channel) => {
         if (channel.channelState.status !== "joined") {

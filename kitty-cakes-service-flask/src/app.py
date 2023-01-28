@@ -4,6 +4,7 @@ import os
 from dotenv import load_dotenv
 import requests
 from target import target
+from conversation import create_conversation
 import sys
 
 app = Flask(__name__)
@@ -24,14 +25,11 @@ def auth():
 
 @app.route("/conversation", methods=["GET"])
 def get_conversation():
-    global conversation
-    if not conversation:
-        account_sid = os.getenv("TWILIO_ACCOUNT_SID")
-        auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+    sid = os.getenv("TWILIO_ACCOUNT_SID")
+    auth = os.getenv("TWILIO_AUTH_TOKEN")
+    conversation = create_conversation(sid, auth)
 
-        return jsonify({"conversation": conversation.sid})
-    else:
-        return jsonify({"conversation": conversation.sid})
+    return jsonify(conversation)
 
 @app.route("/donate", methods=["POST"])
 def donate():
