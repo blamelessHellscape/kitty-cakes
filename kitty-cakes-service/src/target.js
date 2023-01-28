@@ -5,7 +5,10 @@ const target = (cat) => {
     request.post({
     headers: {'content-type' : 'application/json'},
     url:     pi_addr,
-    body:    {'cat': cat}
+    body:    {
+        'cat': cat,
+        'move':0
+                }
   }, function(error, response, body){
     console.log(body);
   });
