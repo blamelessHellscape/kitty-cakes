@@ -1,15 +1,18 @@
 from flask import Flask, jsonify, request
+from flask_cors import CORS
 import os
 from dotenv import load_dotenv
+import requests
 from target import target
+from conversation import create_conversation
 import sys
 
 app = Flask(__name__)
+CORS(app)
 load_dotenv()
 
 db = {'maple': 0,
       'apricot': 0}
-
 
 @app.route("/")
 def hello():
@@ -20,6 +23,13 @@ def hello():
 def auth():
     return jsonify({"secret": os.getenv("TWILIO_AUTH_TOKEN"), "sid": os.getenv("TWILIO_ACCOUNT_SID")})
 
+@app.route("/conversation", methods=["GET"])
+def get_conversation():
+    sid = os.getenv("TWILIO_ACCOUNT_SID")
+    auth = os.getenv("TWILIO_AUTH_TOKEN")
+    conversation = create_conversation(sid, auth)
+
+    return jsonify(conversation)
 
 @app.route("/donate", methods=["POST"])
 def donate():
