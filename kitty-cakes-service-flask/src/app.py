@@ -1,7 +1,7 @@
-from flask import Flask, jsonify, request, Response
+from flask import Flask, jsonify, request
 import os
 from dotenv import load_dotenv
-from .target import target
+from target import target
 import sys
 
 app = Flask(__name__)
@@ -34,9 +34,9 @@ def donate():
 
     if db["maple"] > db["apricot"]:
         print('targeting maple')
-        return Response(target("maple"))
+        return target("maple")
     else:
-        return Response(target("apricot"))
+        return target("apricot")
 
 
 if __name__ == "__main__":
