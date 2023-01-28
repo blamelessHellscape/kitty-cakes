@@ -1,7 +1,7 @@
 # from flask import Response
 import json, requests
 
-pi_addr = "http://192.168.50.150:80"; #insert actual IP here.
+pi_addr = "http://192.168.50.150:80/pussycat"; #insert actual IP here.
 def target(cat):
     data = {'is_in_frame': False}
     #contact GCP here and figure out if cat is in frame. 
