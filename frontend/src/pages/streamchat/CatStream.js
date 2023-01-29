@@ -124,7 +124,7 @@ function CatStream() {
         }
 
         fetchData();
-    }, []);
+    }, [cats]);
 
     if (Array.isArray(cats)) {
         sorted_cats = cats.sort((a, b) => {
