@@ -1,0 +1,18 @@
+.StreamChat {
+    display: flex;
+    /* align-items: ; */
+}
+
+.twitchstream {
+    display: flex;
+    width: 75%;
+}
+
+.leaders {
+    display: flex;
+    width: 25%;
+}
+
+.cat-row {
+    width: 100px;
+}
