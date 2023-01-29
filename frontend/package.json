@@ -17,6 +17,7 @@
     "react-redux": "^8.0.5",
     "react-router-dom": "^6.8.0",
     "react-scripts": "5.0.1",
+    "react-twitch-embed": "^3.0.1",
     "twilio": "^3.84.1",
     "twilio-chat": "^6.0.0",
     "video.js": "^7.21.1",

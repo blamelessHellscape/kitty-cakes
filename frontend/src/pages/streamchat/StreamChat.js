@@ -5,9 +5,9 @@ import Chat from './Chat';
 
 function StreamChat() {
     return (
-        <div className='StreamChat'>
-            <CatStream />
+        <div className='StreamChat' >
             <Chat />
+            <CatStream />
         </div>
     )
 }

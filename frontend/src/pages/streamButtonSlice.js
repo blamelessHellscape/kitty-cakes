@@ -29,5 +29,6 @@ export const { click, update_group, get_auth } = buttonSlice.actions;
 
 export const selectButton = (state) => state.streamButton.clicked;
 export const selectGroup = (state) => state.streamButton.group_sid;
+export const selectAPIInfo = (state) => state.streamButton;
 
 export default buttonSlice.reducer;

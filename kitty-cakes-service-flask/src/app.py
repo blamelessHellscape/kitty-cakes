@@ -48,6 +48,23 @@ def donate():
     else:
         return target("apricot")
 
+@app.route("/get_cats", methods=["GET"])
+def get_cats():
+    return jsonify(db)
+
+@app.route("/getTopCat", methods=["GET"])
+def get_top_cat():
+    cat, num = max(db.items(), key=lambda k: k[1])
+
+    return jsonify({'cat': cat, 'num': num})
+
+@app.route("/donate-create", methods=["POST"])
+def donate_create():
+    create = request.get_json()
+
+    print(create)
+
+    return jsonify({"status": 202})
 
 if __name__ == "__main__":
-    app.run()
+    app.run('0.0.0.0', 5000)
