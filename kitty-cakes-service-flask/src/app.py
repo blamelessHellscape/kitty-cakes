@@ -3,7 +3,6 @@ from flask_cors import CORS
 import os
 from dotenv import load_dotenv
 import requests
-from target import target
 from conversation import create_conversation
 import sys
 
@@ -33,20 +32,14 @@ def get_conversation():
 
 @app.route("/donate", methods=["POST"])
 def donate():
-    # print('hey', file=sys.stderr)
-    target_cat = request.form["cat"].lower()
-    print(str(target_cat))
-    amount = request.form["amount"]
+    cat_data = request.get_json()
 
-    total = db[target_cat]
-    new_total = total + float(amount)
-    db[target_cat] = new_total
+    if cat_data.get('cat') and cat_data['cat'] in db:
+        db[cat_data['cat']] += 1
 
-    if db["maple"] > db["apricot"]:
-        print('targeting maple')
-        return target("maple")
-    else:
-        return target("apricot")
+    # print(db)
+
+    return jsonify({'status': 200, 'data': db})
 
 @app.route("/get_cats", methods=["GET"])
 def get_cats():
