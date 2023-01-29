@@ -2,13 +2,14 @@ import requests, base64, time
 from google.cloud import aiplatform
 from google.cloud.aiplatform.gapic.schema import predict
 from twitchrealtimehandler import TwitchImageGrabber
+from PIL import Image as im
 
 pi_addr = "http://192.168.50.150:80/pussycat"; #insert actual IP here.
 twitch_stream = "https://www.twitch.tv/hoya_hacks_kitty_cakes" 
 twilio_server = "http://192.168.50.6:5000/getTopCat"
 THRESHOLD = 70
-client_options = {"api_endpoint": "us-central1-aiplatform.googleapis.com"}
-client = aiplatform.gapic.PredictionServiceClient(client_options=client_options)
+# client_options = {"api_endpoint": "us-central1-aiplatform.googleapis.com"}
+# client = aiplatform.gapic.PredictionServiceClient(client_options=client_options)
 
 def target():
     data = 'flag='
@@ -22,16 +23,19 @@ def target():
     rate=10  # frame per rate (fps)
     )
     frame = image_grabber.grab()
-    return
+    # return
     print(frame)
     print(type(frame))
     image_grabber.terminate()  # stop the transcoding
-    # with open('nothing.jpg', "rb") as f:
-    file_content = frame.read()
-    with open('output', 'wb+') as file:
-        for chunk in file_content.chunks():
-            file.write(chunk)
     return
+    # with open('nothing.jpg', "rb") as f:
+    # file_content = frame.read()
+    # with open('output', 'wb+') as file:
+    #     for chunk in file_content.chunks():
+    #         file.write(chunk)
+    # return
+    file_content = im.fromarray(frame)
+    file_content.save("nothing.jpg")
     print('reading cat')
     # The format of each instance should conform to the deployed model's prediction input schema.
     encoded_content = base64.b64encode(file_content).decode("utf-8")
