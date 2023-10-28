@@ -7,7 +7,7 @@
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^14.4.3",
-    "@twilio/conversations": "^2.2.1",
+    "@twilio/conversations": "^2.4.1",
     "@types/video.js": "^7.3.50",
     "axios": "^1.2.6",
     "bootstrap": "^5.2.3",
