@@ -33,4 +33,4 @@ traitlets==5.8.1
 twilio==7.16.2
 urllib3==1.26.14
 wcwidth==0.2.6
-Werkzeug==2.2.2
+Werkzeug==3.0.1
